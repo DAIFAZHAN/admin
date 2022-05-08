@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <el-form class="login-form" :model="loginForm" :rules="loginRules">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
@@ -9,21 +9,30 @@
         <span class="svg-container">
           <svg-icon icon="user" />
         </span>
-        <el-input placeholder="username" name="username" type="text" />
+        <el-input
+          placeholder="username"
+          name="username"
+          type="text"
+          v-model="loginForm.username"
+        />
       </el-form-item>
       <!-- password -->
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon="password" />
         </span>
-        <el-input placeholder="password" name="password" />
+        <el-input
+          placeholder="password"
+          name="password"
+          v-model="loginForm.password"
+        />
         <span class="show-pwd">
           <span class="svg-container">
             <svg-icon icon="eye" />
           </span>
         </span>
       </el-form-item>
-
+      <!-- 登录按钮 -->
       <el-button type="primary" style="width: 100%; margin-bottom: 30px"
         >登录</el-button
       >
@@ -32,7 +41,35 @@
 </template>
 
 <script setup>
-import {} from 'vue'
+// 1. 为 el-form 绑定 model 属性
+// 2. 为 el-form 绑定 rules 属性
+// 3. 为 el-form-item 绑定 prop 属性
+// 保证以上三点即可为 el-from 添加表单校验功能。
+import { ref } from 'vue'
+import { validatePassword } from './rules'
+
+// 数据源
+const loginForm = ref({
+  username: 'super-admin',
+  password: '123456'
+})
+// 验证规则
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur', // 鼠标离开
+      message: '用户名为必填项'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
 </script>
 
 <style lang="scss" scoped>
