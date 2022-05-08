@@ -5,6 +5,7 @@ import { login } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import router from '@/router'
 
 export default {
   namespaced: true, // 单独的模块，不会被合并到其他模块去
@@ -31,6 +32,8 @@ export default {
         })
           .then((data) => {
             this.commit('user/setToken', data.token)
+            // 跳转
+            router.push('/')
             resolve()
           })
           .catch((err) => {
