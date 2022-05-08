@@ -24,11 +24,14 @@
         <el-input
           placeholder="password"
           name="password"
+          :type="passwordType"
           v-model="loginForm.password"
         />
         <span class="show-pwd">
-          <span class="svg-container">
-            <svg-icon icon="eye" />
+          <span class="svg-container" @click="onChangePwdType">
+            <svg-icon
+              :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+            />
           </span>
         </span>
       </el-form-item>
@@ -41,10 +44,6 @@
 </template>
 
 <script setup>
-// 1. 为 el-form 绑定 model 属性
-// 2. 为 el-form 绑定 rules 属性
-// 3. 为 el-form-item 绑定 prop 属性
-// 保证以上三点即可为 el-from 添加表单校验功能。
 import { ref } from 'vue'
 import { validatePassword } from './rules'
 
@@ -70,6 +69,19 @@ const loginRules = ref({
     }
   ]
 })
+// 处理密码框文本显示状态
+const passwordType = ref('password')
+// template中绑定的方法，直接声明即可
+const onChangePwdType = () => {
+  // 当 passwordType 的值为 password 的时候，改为text
+  // 使用 ref 声明的数据，在 script 中使用时，需要加value来获取具体的值
+  // 但是在template中使用时，不需要加value
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -140,7 +152,6 @@ $cursor: #fff;
   .show-pwd {
     position: absolute;
     right: 10px;
-    top: 7px;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
