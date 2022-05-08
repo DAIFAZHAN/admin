@@ -30,7 +30,7 @@ export default {
           password: md5(password) // 使用MD5加密
         })
           .then((data) => {
-            this.commit('user/setToken', data.data.data.token)
+            this.commit('user/setToken', data.token)
             resolve()
           })
           .catch((err) => {
