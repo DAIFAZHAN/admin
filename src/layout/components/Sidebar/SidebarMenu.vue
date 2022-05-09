@@ -23,3 +23,17 @@
     </el-menu-item>
   </el-menu>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { filterRouters, generateMenus } from '@/utils/route'
+
+const router = useRouter()
+console.log(router.getRoutes()) // 返回完整路由表，但存在重复的路由数据
+const routes = computed(() => {
+  const fRoutes = filterRouters(router.getRoutes())
+  return generateMenus(fRoutes)
+})
+console.log(JSON.stringify(routes.value))
+</script>
