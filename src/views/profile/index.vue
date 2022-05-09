@@ -1,6 +1,6 @@
 <template>
   <div class="">个人中心</div>
-  <div>
+  <!-- <div>
     {{ $t('msg.test') }}
   </div>
   <el-pagination
@@ -17,7 +17,7 @@
     <el-button type="warning">Warning</el-button>
     <el-button type="danger">Danger</el-button>
     <el-button>中文</el-button>
-  </el-row>
+  </el-row> -->
 </template>
 
 <script setup>
