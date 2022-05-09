@@ -12,6 +12,8 @@ const getters = {
   /**
    * 左侧菜单栏伸缩
    */
-  sidebarOpened: (state) => state.app.sidebarOpened
+  sidebarOpened: (state) => state.app.sidebarOpened,
+
+  language: (state) => state.app.language
 }
 export default getters
