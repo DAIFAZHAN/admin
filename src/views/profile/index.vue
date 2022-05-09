@@ -3,13 +3,13 @@
   <div>
     {{ $t('msg.test') }}
   </div>
-  <!--
   <el-pagination
     :page-size="100"
     layout="total, prev, pager, next"
     :total="1000"
   >
   </el-pagination>
+  <!--
   <el-row class="mb-4">
     <el-button>Default</el-button>
     <el-button type="primary">Primary</el-button>

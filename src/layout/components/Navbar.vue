@@ -12,7 +12,7 @@
             :size="40"
             :src="$store.getters.userInfo.avatar"
           ></el-avatar>
-          <i class="el-icon-s-tools"></i>
+          <el-icon><setting /></el-icon>
         </div>
         <!-- 插入到dropdown插槽 -->
         <template #dropdown>

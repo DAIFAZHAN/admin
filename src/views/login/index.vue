@@ -150,7 +150,7 @@ $cursor: #fff;
       height: 47px;
       width: 85%;
 
-      input {
+      .el-input__wrapper {
         //el-input内的input框
         background: transparent;
         border: 0px;
