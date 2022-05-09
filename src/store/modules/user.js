@@ -2,7 +2,7 @@
  * 处理所有和⽤户相关的内容
  */
 import { login } from '@/api/sys'
-import md5 from 'md5'
+// import md5 from 'md5'
 import { setItem, getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
@@ -28,9 +28,11 @@ export default {
       return new Promise((resolve, reject) => {
         login({
           username,
-          password: md5(password) // 使用MD5加密
+          // password: md5(password) // 使用MD5加密
+          password // 暂不加密配合mock
         })
           .then((data) => {
+            console.log(data)
             this.commit('user/setToken', data.token)
             // 跳转
             router.push('/')
