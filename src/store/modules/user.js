@@ -6,6 +6,7 @@ import { login, getUserInfo } from '@/api/sys'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
 
 export default {
   namespaced: true, // 单独的模块，不会被合并到其他模块去
@@ -40,6 +41,8 @@ export default {
             this.commit('user/setToken', data.token)
             // 跳转
             router.push('/')
+            // 保存登录时间
+            setTimeStamp()
             resolve()
           })
           .catch((err) => {
