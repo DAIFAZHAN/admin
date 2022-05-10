@@ -7,7 +7,7 @@
     <sidebar
       id="guide-sidebar"
       class="sidebar-container"
-      :style="{ backgroundColor: variables.menuBg }"
+      :style="{  backgroundColor: $store.getters.cssVar.menuBg }"
     /><!-- 为了主题更换，此处使用动态scss -->
     <div class="main-container">
       <div class="fixed-header">
