@@ -14,7 +14,7 @@ const messages = {
     }
   }
 }
-const locale = 'en'
+const locale = 'zh'
 
 const i18n = createI18n({
   // 使⽤ Composition API 模式，则需要将其设置为false
