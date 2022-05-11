@@ -24,6 +24,7 @@ import { watchSwitchLang } from '@/utils/i18n'
 import { defineProps, defineEmits, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getUserManageAllList } from '@/api/user-manage'
+import { USER_RELATIONS } from './Export2ExcelConstants'
 
 defineProps({
   modelValue: {
@@ -50,8 +51,42 @@ const loading = ref(false)
 const onConfirm = async () => {
   loading.value = true
   const allUser = (await getUserManageAllList()).list
+
+  // 导⼊⼯具包
+  const excel = await import('@/utils/Export2Excel')
+  const data = formatJson(USER_RELATIONS, allUser)
+  excel.export_json_to_excel({
+    // excel 表头
+    header: Object.keys(USER_RELATIONS),
+    // excel 数据（⼆维数组结构）
+    data,
+    // ⽂件名称
+    filename: excelName.value || exportDefaultName,
+    // 是否⾃动列宽
+    autoWidth: true,
+    // ⽂件类型
+    bookType: 'xlsx'
+  })
   closed()
 }
+
+// 该⽅法负责将数组转化成⼆维数组
+// 当我们使用 export_json_to_excel 的时候，我们传递的 data 数据，它必须是一个二维数组
+const formatJson = (headers, rows) => {
+  // ⾸先遍历数组
+  // [{ username: '张三'},{},{}] => [[’张三'],[],[]]
+  return rows.map((item) => {
+    return Object.keys(headers).map((key) => {
+      // ⻆⾊特殊处理
+      if (headers[key] === 'role') {
+        const roles = item[headers[key]]
+        return JSON.stringify(roles.map((role) => role.title))
+      }
+      return item[headers[key]]
+    })
+  })
+}
+
 /**
  * 关闭
  */
