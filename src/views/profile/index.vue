@@ -29,6 +29,7 @@ import Feature from './components/Feature.vue'
 import Author from './components/Author.vue'
 import { feature } from '@/api/user'
 import { ref } from 'vue'
+import { watchSwitchLang } from '@/utils/i18n'
 
 const activeName = ref('feature')
 
@@ -37,6 +38,8 @@ const getFeatureData = async () => {
   featureData.value = await feature()
 }
 getFeatureData()
+// 监听语⾔切换
+watchSwitchLang(getFeatureData)
 </script>
 <style lang="scss" scoped>
 .my-container {

@@ -23,7 +23,7 @@ service.interceptors.request.use(
       config.headers.Authorization = store.getters.token // 配合mock做的修改
     }
     // 配置接口国际化
-    // config.headers['Accept-Language'] = store.getters.language
+    config.headers['Accept-Language'] = store.getters.language
 
     return config // 必须返回配置
   },
