@@ -57,9 +57,12 @@
         >
           <template #default="{ row }">
             <!-- 获取当前行数据 -->
-            <el-button type="primary" size="mini">{{
-              $t('msg.excel.show')
-            }}</el-button>
+            <el-button
+              type="primary"
+              size="mini"
+              @click="onShowClick(row._id)"
+              >{{ $t('msg.excel.show') }}</el-button
+            >
             <el-button type="info" size="mini">{{
               $t('msg.excel.showRole')
             }}</el-button>
@@ -126,6 +129,13 @@ const handleSizeChange = (currentSize) => {
 const handleCurrentChange = (currentPage) => {
   page.value = currentPage
   getListData()
+}
+
+/**
+ * 查看按钮点击事件
+ */
+const onShowClick = (id) => {
+  router.push(`/user/info/${id}`)
 }
 
 /**
