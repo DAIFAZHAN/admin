@@ -10,6 +10,15 @@ export const getUserManageList = (data) => {
 }
 
 /**
+ * 获取所有⽤户列表数据
+ */
+export const getUserManageAllList = () => {
+  return request({
+    url: '/user-manage/all-list'
+  })
+}
+
+/**
  * 批量导⼊
  */
 export const userBatchImport = (data) => {
