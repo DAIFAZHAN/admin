@@ -11,7 +11,7 @@ const service = axios.create({
 service.interceptors.request.use(
   (config) => {
     // 添加 icode
-    // config.headers.icode = '64011644289BCFA4'
+    config.headers.icode = '1'
     // 如果有token 请求头统一注入token
     if (store.getters.token) {
       // 登录超时退出
