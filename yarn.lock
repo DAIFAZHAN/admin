@@ -3241,9 +3241,14 @@
   "resolved" "https://registry.npmjs.org/dargs/-/dargs-7.0.0.tgz"
   "version" "7.0.0"
 
+"dayjs@^1.10.6":
+  "integrity" "sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.10.6.tgz"
+  "version" "1.10.6"
+
 "dayjs@^1.11.1":
   "integrity" "sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw=="
-  "resolved" "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.2.tgz"
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.2.tgz"
   "version" "1.11.2"
 
 "debug@^2.2.0":
