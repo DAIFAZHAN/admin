@@ -19,6 +19,10 @@
       @dragover.stop.prevent="handleDragover"
       @dragenter.stop.prevent="handleDragover"
     >
+      <!-- 1. drop (en-US)：当元素或选中的⽂本在可释放⽬标上被释放时触发（松鼠标了）
+      2. dragover (en-US)：当元素或选中的⽂本被拖到⼀个可释放⽬标上时触发（未松）
+      3. dragenter (en-US)：当拖拽元素或选中的⽂本到⼀个可释放⽬标时触发（未松） -->
+      <!-- drop被释放时，松鼠标了触发；其他2个只拖到，未松鼠标触发 -->
       <!-- <i class="el-icon-upload" /> -->
       <el-icon><upload-filled /></el-icon>
       <span>{{ $t('msg.uploadExcel.drop') }}</span>
@@ -29,7 +33,8 @@
 <script setup>
 import XLSX from 'xlsx'
 import { defineProps, ref } from 'vue'
-import { getHeaderRow } from './utils'
+import { getHeaderRow, isExcel } from './utils'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   // 上传前回调
@@ -109,6 +114,34 @@ const readerData = (rawFile) => {
  */
 const generateData = (excelData) => {
   props.onSuccess && props.onSuccess(excelData)
+}
+
+/**
+ * 拖拽⽂本释放时触发
+ */
+const handleDrop = (e) => {
+  // 上传中跳过
+  if (loading.value) return
+  const files = e.dataTransfer.files
+  if (files.length !== 1) {
+    ElMessage.error('必须要有⼀个⽂件')
+    return
+  }
+  const rawFile = files[0]
+  if (!isExcel(rawFile)) {
+    ElMessage.error('⽂件必须是 .xlsx, .xls, .csv 格式')
+    return false
+  }
+  // 触发上传事件
+  upload(rawFile)
+}
+/**
+ * 拖拽悬停时触发
+ */
+const handleDragover = (e) => {
+  // https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer/dropEffect
+  // 在新位置⽣成源项的副本
+  e.dataTransfer.dropEffect = 'copy'
 }
 </script>
 
