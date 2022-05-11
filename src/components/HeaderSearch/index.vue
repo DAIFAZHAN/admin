@@ -1,10 +1,28 @@
 <template>
   <div :class="{ show: isShow }" class="header-search">
-    <svg-icon class-name="search-icon" icon="search" @click.stop="onShowClick" />
-    <el-select ref="headerSearchSelectRef" class="header-search-select" v-model="search" filterable default-first-option
-      remote placeholder="Search" :remote-method="querySearch" @change="onSelectChange">
-      <el-option v-for="option in searchOptions" :key="option.item.path" :label="option.item.title.join(' > ')"
-        :value="option.item"></el-option>
+    <svg-icon
+      id="guide-search"
+      class-name="search-icon"
+      icon="search"
+      @click.stop="onShowClick"
+    />
+    <el-select
+      ref="headerSearchSelectRef"
+      class="header-search-select"
+      v-model="search"
+      filterable
+      default-first-option
+      remote
+      placeholder="Search"
+      :remote-method="querySearch"
+      @change="onSelectChange"
+    >
+      <el-option
+        v-for="option in searchOptions"
+        :key="option.item.path"
+        :label="option.item.title.join(' > ')"
+        :value="option.item"
+      ></el-option>
     </el-select>
   </div>
 </template>
@@ -27,7 +45,7 @@ let searchPool = computed(() => {
  * 搜索库相关
  */
 let fuse
-const initFuse = searchPool => {
+const initFuse = (searchPool) => {
   fuse = new Fuse(searchPool, {
     // 是否按优先级进⾏排序
     shouldSort: true,
@@ -63,7 +81,7 @@ const onClose = () => {
 /**
  * 监听 search 打开，处理 close 事件
  */
-watch(isShow, val => {
+watch(isShow, (val) => {
   if (val) {
     headerSearchSelectRef.value.focus()
     // 搜索框开启时，点击其他触发事件
@@ -85,7 +103,7 @@ const search = ref('')
 // 搜索结果
 const searchOptions = ref([])
 // 搜索⽅法
-const querySearch = query => {
+const querySearch = (query) => {
   if (query !== '') {
     searchOptions.value = fuse.search(query)
   } else {
@@ -94,7 +112,7 @@ const querySearch = query => {
 }
 
 // 选中回调
-const onSelectChange = val => {
+const onSelectChange = (val) => {
   router.push(val.path)
 }
 
