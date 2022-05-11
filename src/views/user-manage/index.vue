@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onActivated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getUserManageList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
@@ -105,6 +105,7 @@ const getListData = async () => {
 getListData()
 // 监听语⾔切换
 watchSwitchLang(getListData)
+onActivated(getListData)
 // 分⻚相关
 /**
  * size 改变触发
