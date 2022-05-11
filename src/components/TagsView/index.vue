@@ -29,7 +29,7 @@
 </template>
 <script setup>
 import ContextMenu from './ContextMenu.vue'
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -69,6 +69,22 @@ const openMenu = (e, index) => {
   selectIndex.value = index
   visible.value = true
 }
+/**
+ * 关闭 menu
+ */
+const closeMenu = () => {
+  visible.value = false
+}
+/**
+ * 监听变化
+ */
+watch(visible, (val) => {
+  if (val) {
+    document.body.addEventListener('click', closeMenu)
+  } else {
+    document.body.removeEventListener('click', closeMenu)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
