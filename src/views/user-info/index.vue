@@ -1,10 +1,12 @@
 <template>
   <div class="user-info-container">
     <el-card class="print-box">
-      <el-button type="primary">{{ $t('msg.userInfo.print') }}</el-button>
+      <el-button type="primary" v-print="printObj" :loading="printLoading">{{
+        $t('msg.userInfo.print')
+      }}</el-button>
     </el-card>
     <el-card>
-      <div class="user-info-box">
+      <div id="userInfoBox" class="user-info-box">
         <!-- 标题 -->
         <h2 class="title">{{ $t('msg.userInfo.title') }}</h2>
         <div class="header">
@@ -99,6 +101,24 @@ const getUserDetail = async () => {
 getUserDetail()
 // 语⾔切换
 watchSwitchLang(getUserDetail)
+
+// 打印相关
+const printLoading = ref(false)
+// 创建打印对象
+const printObj = {
+  // 打印区域
+  id: 'userInfoBox',
+  // 打印标题
+  popTitle: 'imooc-vue-element-admin',
+  // 打印前
+  beforeOpenCallback(vue) {
+    printLoading.value = true
+  },
+  // 执⾏打印
+  openCallback(vue) {
+    printLoading.value = false
+  }
+}
 </script>
 
 <style lang="scss" scoped>
