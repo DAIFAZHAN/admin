@@ -46,3 +46,26 @@ export const userDetail = (id) => {
     url: `/user-manage/detail/${id}`
   })
 }
+
+/**
+ * 获取指定⽤户⻆⾊
+ */
+export const userRoles = (id) => {
+  return request({
+    url: `/user-manage/role/${id}`
+  })
+}
+
+/**
+ * 分⽤户分配⻆⾊
+ */
+export const updateRole = (id, roles) => {
+  console.log('updateRole')
+  return request({
+    url: `/user-manage/update-role/${id}`,
+    method: 'POST',
+    data: {
+      roles
+    }
+  })
+}
